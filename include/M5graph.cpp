@@ -2,7 +2,6 @@
 #include "M5graph.h"
 #include "M5Stack.h"
 
-const int offsetY = 100;
 
 void M5graph::graph(float _roll)
 {

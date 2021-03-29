@@ -55,7 +55,7 @@ Encoder encR(encRA, encRB);
 Encoder encL(encLA, encLB);
 PID pL(Kp,Ki,Kd);
 PID pR(Kp,Ki,Kd);
-M5graph rollGraph;
+M5view::M5graph rollGraph;
 
 void task1(void *pvParameters){
     while (1) {
