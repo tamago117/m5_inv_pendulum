@@ -1,0 +1,24 @@
+{
+	"folders": [
+		{
+			"path": ".."
+		},
+		{
+			"name": "teensy_ether",
+			"path": "..\\teensy_ether"
+		},
+		{
+			"name": "teensy_canCon",
+			"path": "..\\teensy_canCon"
+		},
+		{
+			"name": "teensy_canCon2",
+			"path": "..\\teensy_canCon2"
+		},
+		{
+			"name": "M5_inverted_pendulum",
+			"path": "."
+		}
+	],
+	"settings": {}
+}
