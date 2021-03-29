@@ -2,16 +2,17 @@
 #include "PID.h"
 
 
-PID::PID(float Kp, float Ki, float Kd){
-  trash = Kp;
-  _Kp = Kp;
-  _Ki = Ki;
-  _Kd = Kd;
+PID::PID(float _Kp, float _Ki, float _Kd){
+  float trash = Kp;
+  Kp = _Kp;
+  Ki = _Ki;
+  Kd = _Kd;
+  preTime = micros();
 }
 
-float PID::pid(float goal,float presentValue)
+float PID::pid(const double goal,  double presentValue)
 {
-	dt = (micros() - preTime) / 1000000;
+	double dt = (micros() - preTime) / 1000000;
 	preTime = micros();
 
 	P = goal - presentValue;
@@ -20,7 +21,7 @@ float PID::pid(float goal,float presentValue)
 
   preP = P;
   
-	return _Kp*P + _Ki*I + _Kd*D ;
+	return Kp*P + Ki*I + Kd*D ;
   //_Kp*P + _Ki*I + _Kd*D
 }
 

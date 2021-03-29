@@ -1,29 +1,23 @@
-#ifndef PID_H
-#define PID_H
-
+#pragma once
 #include <Arduino.h>
 
 class PID
 {
 public:
-  PID(float Kp, float Ki, float Kd);
-	float pid( float goal,float presentValue);
+  PID(float _Kp, float _Ki, float _Kd);
+	float pid(const double goal, const double presentValue);
   void resetI();
 private:
-  float trash;
-	float _Kp;
-	float _Ki;
-	float _Kd;
+	float Kp;
+	float Ki;
+	float Kd;
 	float goal;
 	float presentValue;
-  float preTime;
   float preP=0;
-  float reValue;
-  float P;
-  float I;
-  float D;
-  float dt;
-  
+  int preTime;
+  double P;
+  double I=0;
+  double D;
+ 
 };
 
-#endif

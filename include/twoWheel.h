@@ -1,7 +1,6 @@
+#pragma once
 //This Library enable you to use twoWheel inversekinematics,self localization and so on. 
 
-#ifndef twoWheel_H
-#define twoWheel_H
 
 #include <arduino.h>
 #include <stdint.h>
@@ -10,22 +9,24 @@ class twoWheel
 {
 public:
   //distance: distance between two tires
-	twoWheel(uint8_t pin1, uint8_t pin2,uint8_t pin3, uint8_t pin4,float distance);
+	twoWheel(const float distance);
   //v:velocity,w:angular velocity
-	void steering(float v,float w);
-
-protected:
-	uint8_t _pin1;
-	uint8_t _pin2;
-  uint8_t _pin3;
-  uint8_t _pin4;
+	void steering(double& vR,double vL, const double v, const double w);
 
 private:
-  float _v;
-  float _w;
   float d;
-  float vR;
-  float vL;
+  double vR;
+  double vL;
 };
 
-#endif
+twoWheel::twoWheel(const float distance)
+{
+  d = distance;
+}
+
+void twoWheel::steering(double& vR,double vL, const double v, const double w)
+{
+	vR = v + d*w;
+  vL = v - d*w;
+}
+

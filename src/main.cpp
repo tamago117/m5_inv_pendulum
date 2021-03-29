@@ -13,7 +13,7 @@
 #include <BLEDevice.h>
 #include <BLEServer.h>
 
-#include "M5graph.h"
+//#include "M5graph.h"
 #include "MotorDriver.h"
 #include "PID.h"
 
@@ -55,7 +55,7 @@ Encoder encR(encRA, encRB);
 Encoder encL(encLA, encLB);
 PID pL(Kp,Ki,Kd);
 PID pR(Kp,Ki,Kd);
-M5view::M5graph rollGraph;
+//M5view::M5graph rollGraph;
 
 void task1(void *pvParameters){
     while (1) {
@@ -74,7 +74,7 @@ void task1(void *pvParameters){
       motorL.setSpeed(resultL*0.05);
       motorR.setSpeed(resultR);
 
-      rollGraph.graph(roll);
+      //rollGraph.graph(roll);
       
     delay(1);
   }
