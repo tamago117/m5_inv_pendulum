@@ -4,33 +4,33 @@
 namespace pen{
 
 class pendulum : public PID{
-PID pid;
+//PID pid;
 
 private:
     float Kx,Kv;
     int preTime;
-    double newX, preX;
+    double newX;
+    double preX = 0;
 public:
     pendulum(float Kp, float Ki, float Kd, float _Kx, float _Kv);
-    double update(const int roll, const int enc);
+    double update(const double tarValue ,const double tarXValue ,const int roll, const int enc);
 };
 
-pendulum::pendulum(float Kp, float Ki, float Kd, float _Kx, float _Kv) : pid(Kp, Ki, Kd)
+pendulum::pendulum(float Kp, float Ki, float Kd, float _Kx, float _Kv) : PID(Kp, Ki, Kd), Kx(_Kx), Kv(_Kv)
 {
-    Kx = _Kx;
-    Kv = _Kv;
     preTime = micros();
 }
 
-double pendulum::update(const int roll, const int enc)
+double pendulum::update(const double tarRollValue, const double tarXValue, const int roll, const int enc)
 {
+    newX = tarXValue - enc; 
     double dt = (micros() - preTime) / 1000000;
     preTime = micros();
     double v = (newX - preX)/dt;
     
     preX = newX;
 
-    double result = pid.pid( 6, roll) + Kx*newX + Kv*v;
+    double result = PID::update(tarRollValue, roll) + Kx*newX + Kv*v;
 }
 
 }//end namespace

@@ -10,7 +10,7 @@ PID::PID(float _Kp, float _Ki, float _Kd){
   preTime = micros();
 }
 
-float PID::pid(const double goal,  double presentValue)
+float PID::update(const double goal,  double presentValue)
 {
 	double dt = (micros() - preTime) / 1000000;
 	preTime = micros();

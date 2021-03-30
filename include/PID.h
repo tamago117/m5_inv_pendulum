@@ -5,7 +5,7 @@ class PID
 {
 public:
   PID(float _Kp, float _Ki, float _Kd);
-	float pid(const double goal, const double presentValue);
+	float update(const double goal, const double presentValue);
   void resetI();
 private:
 	float Kp;
