@@ -16,6 +16,7 @@
 //#include "M5graph.h"
 #include "MotorDriver.h"
 #include "PID.h"
+#include "pendulum.h"
 
 // You should get Auth Token in the Blynk App.
 // Go to the Project Settings (nut icon).
@@ -53,23 +54,17 @@ MotorDriver motorL(motor1A, motor1B);
 MotorDriver motorR(motor2A, motor2B);
 Encoder encR(encRA, encRB);
 Encoder encL(encLA, encLB);
-PID pL(Kp,Ki,Kd);
-PID pR(Kp,Ki,Kd);
+pen::pendulum pL(Kp, Ki, Kd, Kx, Kv);
+pen::pendulum pR(Kp, Ki, Kd, Kx, Kv);
+
 //M5view::M5graph rollGraph;
 
 void task1(void *pvParameters){
     while (1) {
       M5.IMU.getAhrsData(&pitch, &roll, &yaw);
 
-      dt = (micros() - preTime) / 1000000;
-      vL = (newL - preL)/dt;
-      vR = (newR - preR)/dt;
-      preTime = micros();
-      preL = newL;
-      preR = newR; 
-
-      resultL = pL.pid( 6, roll) + Kx*newL + Kv*vL;
-      resultR = pR.pid( 6, roll) + Kx*newR + Kv*vR;
+      resultL = pL.update(0, 0, roll, newL);
+      resultR = pR.update(0, 0, roll, newL);
   
       motorL.setSpeed(resultL*0.05);
       motorR.setSpeed(resultR);
